@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>   
+<title>Прогноз погоды 4 дня русский</title>
+</head>
+<body id="B">
+<div id="p_prldr"><div class="contpre"><span class="svg_anm"></span></div></div>
+<div id="local">
+<ul class="select3"><span id="sel">Выберите язык</span>
+<li class="first1"><a href="index_ua.html">Русский<img style="float:right" src="flag_rossiya.jpg" width="40" height="20"/></a></li>
+<li class="first1"><a href="index_ua.html">Украинский<img style="float:right" src="flag_ukraina.jpg" width="40" height="20"/></a></li>
+</ul>
+<div class="jumbotron">
+    <h2  style="font-size:18px !important;">Местное время и дата</h2>
+	<p>Сегодня: <strong><span id="date"></span></strong></p>
+    <p id="timeOuT">Текущее время: <strong><span id="time" ></span></strong></p>
+  
+ <h2 >Погода для</h2>
+      <p><span  id="city-text" style="font-size:22px;color:#0f3961;"></span><br>
+      <span id="city-text2"></span><br>
+     <span id="city-text3"></span><br>
+     <span id="city-text4"></span><br>
+     <span id="city-text5"></span><br>
+     <span id="city-text6"></span></p>
+ </div>
+<div class="row">
+        <div  id="weather">
+          <img src="" id="weatherImg" class="center-block">
+          <h3 id="weather-text" style="color:#FF66FF;"></h3>
+        </div>
+        <div  id="temp">
+          <h3  style="font-size:18px !important;color:#fff;">Температура<br><span style="font-size: 14px;">Кликните по знаку температуры,<br> щтобы изменить C на F</span></h3>
+          <h3><span id="temp-text"></span> <span id="tempMode">C&deg</span></h3>
+        </div>
+        <div id="wind">
+          <p style="font-size:18px !important;color:#fff;">Скорость ветра</p>
+          <p id="wind-text" style="font-size:16px !important;"></p>
+<br>или<br>
+		  <p id="wind-text2" style="font-size:16px !important;"></p>
+
+        </div>
+ <div class="col-md-4" id="pressure">
+          <p style="font-size:18px !important;color:#fff;">Атмосферное давление</p>
+          <p id="wind-text3" style="font-family:Open Sans;font-size:16px !important;"></p>
+        </div>
+<div class="col-md-4" id="humidity">
+          <p style="font-size:18px !important;color:#fff;">Относительная влажность</p>
+          <p id="wind-text4" style="font-size:16px !important;"></p>
+
+        </div> 
+</div> 
+
+<div class="left">
+<div id="pole">
+<h2>Введите название города</h2>
+<p>*на любом языке</p>
+ <p>Например: <span style="color:green; font-size:16px;">Kharkiv-Харків-Харьков, Kyiv-Київ-Киев, Tokio-Токіо-Токио, <br>Moscow-Москва, Saint Petersburg--Санкт-Петербург--Санкт-Петербург, Tver-Твер-Тверь ...</span></p>
+ <input type="text" value="" id="city" placeholder="Введите название города..."/>
+ <button id="cityB" onclick="showDateTime();">OK</button>
+<h2>Или выберите из списка</h2> 
+<h3>Для получения погоды по области нажмите на <span style='color:blue'><em>Область</em></span> и "ОК"&#11014;</h3>
+<h3>Для получения погоды по городу нажмите на <span style='color:green'><em>Город</em></span> и "ОК"&#11014;</h3>
+</div>
+<div><p><span style="max-width: 255px; margin-left:60px;font-size:18px;font-weight:bold;margin-bottom:2px;background: linear-gradient(45deg, yellow 3%, blue 55%, #0a5fda);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #0B2349;text-shadow:0 0 2px rgba(0,0,0,0.4);">Области и города:</span><br><span style="font-size:12px;">на мобильных устройствах для открытия списка городов нажмите и удерживайте поле "облaсть"</span></p></div>
+<div class="select4"><ul  class="select" name="cityes"><div id="titl">Выберите область/город&#10004;</div>
+    <p id="1" style="opacity:0;">0</p>
+	<li class="first"><span value="Винницкая область" class="k">Винницкая обл.</span>
+	     <ul id="select2">Города
+		   <li><span class = "s" value = "Bar, UA"> Бар</span></li>
+			<li><span class = "s" value = "Bershad", UA "> Бершадь</span></li>
+			<li><span class = "s" value = "Vinnytsya, UA">Винница</span></li>
+			<li><span class = "s" value = "Haysyn, UA">Гайсин</span></li>
+			<li><span class = "s" value = "Hnivan, UA">Гнивань</span></li>
+			<li><span class = "s" value = "Zhmerynka, UA">Жмеринка</span></li>
+			<li><span class = "s" value = "Illintsi, UA">Ильинцы</span></li>
+			<li><span class = "s" value = "Koziatyn, UA">Казатин</span></li>
+			<li><span class = "s" value = "Ladyzhyn, UA">Ладыжин</span></li>
+			<li><span class = "s" value = "Lypovets, UA">Липовец</span></li>
+			<li><span class = "s" value = "Mohyliv-Podilskyi, UA">Могилев-Подольский</span></li>
+			<li><span class = "s" value = "Nemyriv, UA">Немиров</span></li>
+			<li><span class = "s" value = "Pohrebyshche, UA">Погребище</span></li>
+			<li><span class = "s" value = "Tulchyn, UA">Тульчин</span></li>
+			<li><span class = "s" value = "Khmilnyk, UA">Хмельник</span></li>
+			<li><span class = "s" value = "Sharhorod, UA">Шаргород</span></li>
+			<li><span class = "s" value = "Yampil, UA">Ямполь</span></li>
+		 </ul>		
+	</li>
+	<li class="first"><span value="Волынская область" class="k">Волынская обл.</span>
+	     <ul id="select2">Города
+		    <li><span class = "s" value = "Berestechko, UA">Берестечко</span></li>
+			<li><span class = "s" value = "Volodymyr-Volynskyi, UA">Владимир-Волынский</span></li>
+			<li><span class = "s" value = "Horokhiv, UA">Горохов</span></li>
+			<li><span class = "s" value = "Kamin-Kashyrskyi, UA">Камень-Каширский</span></li>
+			<li><span class = "s" value = "Kivertsi, UA">Кварц</span></li>
+			<li><span class = "s" value = "Kovel, UA">Ковель</span></li>
+			<li><span class = "s" value = "Lutsk, UA">Луцк</span></li>
+			<li><span class = "s" value = "Lyuboml, UA">Любомль</span></li>
+			<li><span class = "s" value = "Novovolynsk, UA">Нововолынск</span></li>
+			<li><span class = "s" value = "Rozhyshche, UA">Рожище</span></li>
+			<li><span class = "s" value = "Stara vyzhivka, UA">Старая Выжевка</span></li>
+			<li><span class = "s" value = "Ustyluh, UA">Устилуг</span></li>
+			<li><span class = "s" value = "Chatsk, UA">Шацк</span></li>
+		 </ul>		
+	</li>
+	<li class="first"><span value="Dnipropetrovska Oblast'" class="k">Днепропетровская обл.</span>
+	     <ul id="select2">Города
+		   <li><span class = "s" value = "Apostolove, UA">Апостолово</span></li>
+			<li><span class = "s" value = "Verkhivtseve, UA">Верховцево</span></li>
+			<li><span class = "s" value = "Verkhnodniprovsk, UA">Верхнеднепровск</span></li>
+			<li><span class = "s" value = "Vilnohirsk, UA">Вольногорск</span></li>
+			<li><span class = "s" value = "Dnipropetrovsk">Днипро</span></li>
+			<li><span class = "s" value = "Zhovti Vody, UA">Желтые Воды</span></li>
+			<li><span class = "s" value = "Zelenodolsk, UA">Зеленодольск</span></li>
+			<li><span class = "s" value = "Dniprodzerzhynsk, UA">Каменское</span></li>
+			<li><span class = "s" value = "Kryvyi Rih, UA">Кривой Рог</span></li>
+			<li><span class = "s" value = "Marhanets, UA">Марганец</span></li>
+			<li><span class = "s" value = "Nikopol, UA">Никополь</span></li>
+			<li><span class = "s" value = "Novomoskovsk, UA">Новомосковск</span></li>
+			<li><span class = "s" value = "Pokrov, UA">Покров</span></li>
+			<li><span class = "s" value = "Pavlohrad, UA">Павлоград</span></li>
+			<li><span class = "s" value = "Pereshchepyne, UA">Перещепино</span></li>
+			<li><span class = "s" value = "Pershotravensk, UA">Першотравенск</span></li>
+			<li><span class = "s" value = "Pidhorodne, UA">Подгородное</span></li>
+			<li><span class = "s" value = "Piatykhatky, UA">Пятихатки</span></li>
+			<li><span class = "s" value = "Synelnykove, UA">Синельниково</span></li>
+			<li><span class = "s" value = "Ternivka, UA">Терновка</span></li>
+			<li><span class = "s" value = "Tomakivka, UA">Томаковка</span></li>
+		 </ul>	
+	</li>
+    <li class="first"><span value="Donets’ka Oblast’" class="k">Донецкая обл.</span>
+	     <ul id="select2">Города
+		   <li><span class = "s" value = "Avdiivka, UA">Авдеевка</span></li>
+			<li><span class = "s" value = "Amvrosiivka, UA">Амвросиевка</span></li>
+			<li><span class = "s" value = "Bakhmut, UA">Бахмут</span></li>
+			<li><span class = "s" value = "Belitskoye, UA">Белицкое</span></li>
+			<li><span class = "s" value = "Bilozerske, UA">Белозерское</span></li>
+			<li><span class = "s" value = "Bunhe, UA">Бунге</span></li>
+			<li><span class = "s" value = "Volnovakha, UA">Волноваха</span></li>
+			<li><span class = "s" value = "Vuhlehirsk, UA">Углегорск</span></li>
+			<li><span class = "s" value = "Vuhledar, UA">Угледар</span></li>
+			<li><span class = "s" value = "Horlivka, UA">Горловка</span></li>
+			<li><span class = "s" value = "Hirnyk, UA">Горняк</span></li>
+			<li><span class = "s" value = "Debaltseve, UA">Дебальцево</span></li>
+			<li><span class = "s" value = "Dobropillia, UA">Доброполье</span></li>
+			<li><span class = "s" value = "Dokuchaievsk, UA">Докучаевск</span></li>
+			<li><span class = "s" value = "Donetsk, UA">Донецк</span></li>
+			<li><span class = "s" value = "Druzhkivka, UA">Дружковка</span></li>
+			<li><span class = "s" value = "Yenakiieve, UA">Енакиево</span></li>
+			<li><span class = "s" value = "Zhdanivka, UA">Ждановка</span></li>
+			<li><span class = "s" value = "Zalizne, UA">Железное</span></li>
+			<li><span class = "s" value = "Zuhres, UA">Зугрэс</span></li>
+			<li><span class = "s" value = "Synelnykove, UA">Иловайск</span></li>
+			<li><span class = "s" value = "Ternivka, UA">Кальмиуське</span></li>
+			<li><span class = "s" value = "Kostiantynivka, UA">Константиновка</span></li>
+			<li><span class = "s" value = "Kramatorsk, UA">Краматорск</span></li>
+			<li><span class = "s" value = "Krasnohorivka, UA">Красногоровка</span></li>
+			<li><span class = "s" value = "Kurakhove, UA">Курахово</span></li>
+			<li><span class = "s" value = "Lyman, UA">Лиман</span></li>
+			<li><span class = "s" value = "Makiivka, UA">Макеевка</span></li>
+			<li><span class = "s" value = "Mariupol, UA">Мариуполь</span></li>
+			<li><span class = "s" value = "Marinka, UA">Марьинка</span></li>
+			<li><span class = "s" value = "Myrnohrad, UA">Мирноград</span></li>
+			<li><span class = "s" value = "Mospyne, UA">Моспино</span></li>
+			<li><span class = "s" value = "Mykolayivka, UA">Николаевка</span></li>
+			<li><span class = "s" value = "Novoazovsk, UA">Новоазовск</span></li>
+			<li><span class = "s" value = "Novohrodivka, UA">Новогродовка</span></li>
+			<li><span class = "s" value = "Pokrovsk, UA">Покровск</span></li>
+			<li><span class = "s" value = "Rodynske, UA">Родинское</span></li>
+			<li><span class = "s" value = "Svitlodarsk, UA">Светлодарск</span></li>
+			<li><span class = "s" value = "Sviatohirsk, UA">Святогорск</span></li>
+			<li><span class = "s" value = "Siversk, UA">Северск</span></li>
+			<li><span class = "s" value = "Selydove, UA">Селидово</span></li>
+			<li><span class = "s" value = "Sloviansk, UA">Славянск</span></li>
+			<li><span class = "s" value = "Snizhne, UA">Снежное</span></li>
+			<li><span class = "s" value = "Soledar, UA">Соледар</span></li>
+			<li><span class = "s" value = "Starobesheve, UA">Саробешево</span></li>
+			<li><span class = "s" value = "Toretsk, UA">Торецкое</span></li>
+			<li><span class = "s" value = "Ukrainsk, UA">Украинск</span></li>
+			<li><span class = "s" value = "Khartsyzk, UA">Харцызск</span></li>
+			<li><span class = "s" value = "Khrestivka, UA">Хрестовка</span></li>
+			<li><span class = "s" value = "Chasiv Yar, UA">Часов Яр</span></li>
+			<li><span class = "s" value = "Chystiakove, UA">Чистяково</span></li>
+			<li><span class = "s" value = "Shakhtarsk, UA">Шахтерск</span></li>
+			<li><span class = "s" value = "Yasynuvata, UA">Ясиноватая</span></li>
+		 </ul>	
+	</li>
+    <li class="first"><span value="Житомирская область" class="k">Житомирская обл.</span>
+	     <ul id="select2">Города
+		   <li><span class = "s" value = "Andrushivka,  UA">Ананьев</span></li>
+			<li><span class = "s" value = "Baranivka,  UA">Барановка</span></li>
+			<li><span class = "s" value = "Berdychiv,  UA">Бердичев</span></li>
+			<li><span class = "s" value = "Zhytomyr, UA">Житомир</span></li>
+			<li><span class = "s" value = "Korosten,  UA">Коростень</span></li>
+			<li><span class = "s" value = "Korostyshiv,  UA">Коростышев</span></li>
+			<li><span class = "s" value = "Malyn,  UA">Малин</span></li>
+			<li><span class = "s" value = "Novohrad-Volynskyi,  UA">Новоград-Волынский</span></li>
+			<li><span class = "s" value = "Ovruch,  UA">Овруч</span></li>
+			<li><span class = "s" value = "Olevsk,  UA">Олевск</span></li>
+			<li><span class = "s" value = "Radomyshl,  UA">Радомышль</span></li>
+			<li><span class = "s" value = "Chudniv,  UA">Чуднов</span></li>
+		 </ul>	
+	</li>
+    <li class="first"><span value="Закарпатская область" class="k">Закарпатская обл.</span>
+	    <ul id="select2">Города
+		   <li><span class = "s" value = "Berehove, UA">Береговое</span></li>
+			<li><span class = "s" value = "Vynohradiv, UA">Виноградов</span></li>
+			<li><span class = "s" value = "Irshava, UA">Иршава</span></li>
+			<li><span class = "s" value = "Mukachevо, UA">Мукачево</span></li>
+			<li><span class = "s" value = "Perechyn, UA">Перечин</span></li>
+			<li><span class = "s" value = "Rakhiv, UA">Рахов</span></li>
+			<li><span class = "s" value = "Svalyava, UA">Свалява</span></li>
+			<li><span class = "s" value = "Tiachiv, Uzhhorod, UA">Тячев</span></li>
+			<li><span class = "s" value = "Uzhhorod, UA">Ужгород</span></li>
+			<li><span class = "s" value = "Khust, UA">Хуст</span></li>
+			<li><span class = "s" value = "Chop, UA">Чоп</span></li>
+		 </ul>	
+	</li>
+    <li class="first"><span value="Запорожская область" class="k">Запорожская обл.</span>
+	      <ul id="select2">Города
+		   <li><span class = "s" value = "Berdiansk, UA">Бердянск</span></li>
+		   <li><span class = "s" value = "Vasylivka, UA">Васильевка</span></li>
+		   <li><span class = "s" value = "Vilniansk, UA">Вольнянск</span></li>
+		   <li><span class = "s" value = "Hulyaypole, UA">Гуляйполе</span></li>
+		   <li><span class = "s" value = "Dniprorudne, UA">Днепрорудное</span></li>
+		   <li><span class = "s" value = "Zaporizhzhia, UA">Запорожье</span></li>
+		   <li><span class = "s" value = "Melitopol, UA">Мелитополь</span></li>
+		   <li><span class = "s" value = "Molochansk, UA">Молочанск</span></li>
+		   <li><span class = "s" value = "Orikhiv, UA">Орехов</span></li>
+		   <li><span class = "s" value = "Polohy, UA">Роды</span></li>
+		   <li><span class = "s" value = "Prymorsk, UA">Приморск</span></li>
+		   <li><span class = "s" value = "Tokmak, UA">Токмак</span></li>
+		   <li><span class = "s" value = "Enerhodar, UA">Энергодар</span></li>
+		 </ul>	
+	</li>
+    <li class="first"><span value="Ивано-Франковская область" class="k">Ивано-Франковская обл.</span>
+	     <ul id="select2">Города
+		    <li><span class = "s" value = "Bolekhiv, UA">Болехов</span></li>
+			<li><span class = "s" value = "Burshtyn, UA">Янтарь</span></li>
+			<li><span class = "s" value = "Galich, UA">Галич</span></li>
+			<li><span class = "s" value = "Horodenka, UA">Городенка</span></li>
+			<li><span class = "s" value = "Dolyna, UA">Долина</span></li>
+			<li><span class = "s" value = "Ivano-Frankivsk, UA">Ивано-Франковск</span></li>
+			<li><span class = "s" value = "Kalush, UA">Калуш</span></li>
+			<li><span class = "s" value = "Kolomyya, UA">Коломыя</span></li>
+			<li><span class = "s" value = "Kosiv, UA">Косов</span></li>
+			<li><span class = "s" value = "Nadvirna, UA">Надворная</span></li>
+			<li><span class = "s" value = "Rogatin, UA">Рогатин</span></li>
+			<li><span class = "s" value = "Sniatyn, UA">Снятин</span></li>
+			<li><span class = "s" value = "Tlumach, UA">Толкователь</span></li>
+			<li><span class = "s" value = "Tysmenytsya, UA">Тысменица</span></li>
+			<li><span class = "s" value = "Yaremche, UA">Яремче</span></li>
+		 </ul>	
+	</li>
+    <li class="first"><span value="Киевская область" class="k">Киевская обл.</span>
+	     <ul id="select2">Города
+		    <li><span class = "s" value = "Bila Tserkva, UA">Белая Церковь</span></li>
+			<li><span class = "s" value = "Berezan", UA "> Березань</span></li>
+			<li><span class = "s" value = "Bohuslav, UA">Богуслав</span></li>
+			<li><span class = "s" value = "Boryspil, UA">Борисполь</span></li>
+			<li><span class = "s" value = "Boyarka, UA">Боярка</span></li>
+			<li><span class = "s" value = "Brovary, UA">Бровары</span></li>
+			<li><span class = "s" value = "Bucha, UA">Буча</span></li>
+			<li><span class = "s" value = "Vasylkiv, UA">Васильков</span></li>
+			<li><span class = "s" value = "Vyshneve, UA">Вишневое</span></li>
+			<li><span class = "s" value = "Vyshhorod, UA">Вышгород</span></li>
+			<li><span class = "s" value = "Irpin, UA">Ирпень</span></li>
+			<li><span class = "s" value = "Kaharlyk, UA">Кагарлык</span></li>
+			<li><span class = "s" value = "Kyiv, UA">Киев</span></li>
+			<li><span class = "s" value = "Myronivka, UA">Мироновка</span></li>
+			<li><span class = "s" value = "Obukhiv, UA">Обухов</span></li>
+			<li><span class = "s" value = "Pereiaslav-Khmelnytskyi, UA">Переяслав</span></li>
+			<li><span class = "s" value = "Pripyat, UA">Припять</span></li>
+			<li><span class = "s" value = "Rzhyschiv, UA">Ржищев</span></li>
+			<li><span class = "s" value = "Skvyra, UA">Сквира</span></li>
+			<li><span class = "s" value = "Slavutich, UA">Славутич</span></li>
+			<li><span class = "s" value = "Tarashcha, UA">Тараща</span></li>
+			<li><span class = "s" value = "Tetiiv, UA">Тетиев</span></li>
+			<li><span class = "s" value = "Uzyn, UA">Узин</span></li>
+			<li><span class = "s" value = "Ukrainka, UA">Украинка</span></li>
+			<li><span class = "s" value = "Fastiv, UA">Фастов</span></li>
+			<li><span class = "s" value = "Chornobyl, UA">Чернобыль</span></li>
+			<li><span class = "s" value = "Yahotyn, UA">Яготин</span></li>
+		 </ul>	
+	</li>
+    <li class="first"><span value="Кировоградская область" class="k">Кировоградская обл.</span>
+	     <ul id="select2">Города
+		    <li> <span class = "s" value = "Oleksandriia, UA">Александрия</span></li>
+			<li> <span class = "s" value = "Blahovishchenske, UA">Благовещенское</span></li>
+			<li> <span class = "s" value = "Bobrynets, IUA">Бобринец</span></li>
+			<li> <span class = "s" value = "Hayvoron, UA">Гайворон</span></li>
+			<li> <span class = "s" value = "Dolynska, UA">Долинская</span></li>
+			<li> <span class = "s" value = "Znamianka, UA">Знаменка</span></li>
+			<li> <span class = "s" value = "Kropyvnytskyi, UA">Кропивницкий</span></li>
+			<li> <span class = "s" value = "Mala Vyska, UA">Малая Виска</span></li>
+			<li> <span class = "s" value = "Novomyrhorod, UA">Новомиргород</span></li>
+			<li> <span class = "s" value = "Novoukrayinka, UA">Новоукраинка</span></li>
+			<li> <span class = "s" value = "Pomichna, UA">Помошная</span></li>
+			<li> <span class = "s" value = "Svitlovodsk, UA">Светловодск</span></li>
+		 </ul>	
+	</li>
+    <li class="first"><span value="Луганская область" class="k">Луганская обл.</span>
+	     <ul id="select2">Города
+	        <li><span class = "s" value = "Oleksandrivsk, UA">Александровск</span></li>
+			<li><span class = "s" value = "Almazna, UA">Алмазная</span></li>
+			<li><span class = "s" value = "Alchevsk, UA">Алчевск</span></li>
+			<li><span class = "s" value = "Antratsit, UA">Антрацит</span></li>
+			<li><span class = "s" value = "Khrustalne, UA">Боково-Хрустальное</span></li>
+			<li><span class = "s" value = "Bryanka, UA">Брянка</span></li>
+			<li><span class = "s" value = "Chervonopartizansk, UA">Червонопартизанск</span> (Вознесеновка)</li>
+			<li><span class = "s" value = "Holubivka, UA">Голубовка</span></li>
+			<li><span class = "s" value = "Hirske, UA">Горное</span></li>
+			<li><span class = "s" value = "Sverdlovsk, UA">Довжанский</span></li>
+			<li><span class = "s" value = "Zymohiria, UA">Зимогорье</span></li>
+			<li><span class = "s" value = "Zolote, UA">Золотое</span></li>
+			<li><span class = "s" value = "Zorynsk, UA">Зоринск</span></li>
+			<li><span class = "s" value = "Irmino, UA">Ирмино</span></li>
+			<li><span class = "s" value = "Kadiivka, UA">Кадиевка</span></li>
+			<li><span class = "s" value = "Artemivsk, UA">кипучей</span></li>
+			<li><span class = "s" value = "Kreminna, UA">Кременная</span></li>
+			<li><span class = "s" value = "Lysychansk, UA">Лисичанск</span></li>
+			<li><span class = "s" value = "Luhansk, UA">Луганск</span></li>
+			<li><span class = "s" value = "Lutuhyne, UA">Лутугино</span></li>
+			<li><span class = "s" value = "Miusynsk, UA">Минусинск</span></li>
+			<li><span class = "s" value = "Molodohvardiysk, UA">Молодогвардейск</span></li>
+			<li><span class = "s" value = "Novodruzhesk, UA">Новодружеск</span></li>
+			<li><span class = "s" value = "Pervomaisk, UA">Первомайск</span></li>
+			<li><span class = "s" value = "Perevalsk, UA">Перевальск</span></li>
+			<li><span class = "s" value = "Petrovske, UA">Петрово-Красноселье</span></li>
+			<li><span class = "s" value = "Popasnaya, UA">Попасная</span></li>
+			<li><span class = "s" value = "Pryvillya, UA">Приволье</span></li>
+			<li><span class = "s" value = "Rovenki, UA">Ровеньки</span></li>
+			<li><span class = "s" value = "Rubizhne, UA">Рубежное</span></li>
+			<li><span class = "s" value = "Svatove, UA">Сватово</span></li>
+			<li><span class = "s" value = "Krasnodon, UA">Сорокино</span></li>
+			<li><span class = "s" value = "Sievierodonetsk, UA">Северодонецк</span></li>
+			<li><span class = "s" value = "Starobilsk, UA">Старобельск</span></li>
+			<li><span class = "s" value = "Sukhodilsk, UA">Суходольск</span></li>
+			<li><span class = "s" value = "Schastia, UA">Счастье</span></li>
+			<li><span class = "s" value = "Khrustalne, UA">Хрустальный</span></li>
+	    </ul>
+	</li>	
+    <li class="first"><span  value="Львовская область" class="k">Львовськая обл.</span>
+	     <ul id="select2">Города
+	        <li><span class = "s" value = "Belz, UA">Белз</span></li>
+			<li><span class = "s" value = "Bibrka, UA">Бибрка</span></li>
+			<li><span class = "s" value = "Boryslav, UA">Борислав</span></li>
+			<li><span class = "s" value = "Brody, UA">Броды</span></li>
+			<li><span class = "s" value = "Velyki Mosty, UA">Великие Мосты</span></li>
+			<li><span class = "s" value = "Vynnyky, UA">Винники</span></li>
+			<li><span class = "s" value = "Hlyniany, UA">Глиняны</span></li>
+			<li><span class = "s" value = "Horodok, UA">Городок</span></li>
+			<li><span class = "s" value = "Dobromyl, UA">Добромиль</span></li>
+			<li><span class = "s" value = "Drogobych, UA">Дрогобыч</span></li>
+			<li><span class = "s" value = "Dublyany, UA">Дубляны</span></li>
+			<li><span class = "s" value = "Zhydachiv, UA">Жидачов</span></li>
+			<li><span class = "s" value = "Zhovkva, UA">Жовква</span></li>
+			<li><span class = "s" value = "Zolochiv, UA">Золочев</span></li>
+			<li><span class = "s" value = "Komarno, UA">Комарно</span></li>
+			<li><span class = "s" value = "Lviv, UA">Львов</span></li>
+			<li><span class = "s" value = "Morshin, UA">Моршин</span></li>
+			<li><span class = "s" value = "Mostyska, UA">Мостиска</span></li>
+			<li><span class = "s" value = "Mykolaiv, UA">Николаев</span></li>
+			<li><span class = "s" value = "Novoiavorivsk, UA">Новояворовск</span></li>
+			<li><span class = "s" value = "Novyi Kalyniv, UA">Новый Калинов</span></li>
+			<li><span class = "s" value = "Novyi Rozdil, UA">Новый Раздел</span></li>
+			<li><span class = "s" value = "Peremyshliany, UA">Перемышляны</span></li>
+			<li><span class = "s" value = "Pustomyty, UA">Обухов</span></li>
+			<li><span class = "s" value = "Rava-Ruska, UA">Рава-Русская</span></li>
+			<li><span class = "s" value = "Radekhiv, UA">Радехов</span></li>
+			<li><span class = "s" value = "Rudki, UA">Рудки</span></li>
+			<li><span class = "s" value = "Sambir, UA">Самбор</span></li>
+			<li><span class = "s" value = "Skole, UA">Сколе</span></li>
+			<li><span class = "s" value = "Sokal, UA">Сокаль</span></li>
+			<li><span class = "s" value = "Sosnivka, UA">Сосновка</span></li>
+			<li><span class = "s" value = "Staryi Sambir, UA">Старый Самбор</span></li>
+			<li><span class = "s" value = "Stebnik, UA">Стебник</span></li>
+			<li><span class = "s" value = "Stryi, UA">Стрый</span></li>
+			<li><span class = "s" value = "Sudovaya Vishnya, UA">Судовая Вишня</span></li>
+			<li><span class = "s" value = "Truskavets, UA">Трускавец</span></li>
+			<li><span class = "s" value = "Turka, UA">Турка</span></li>
+			<li><span class = "s" value = "Uhniv, UA">Угнев</span></li>
+			<li><span class = "s" value = "Khodoriv, ​​UA">Ходоров</span></li>
+			<li><span class = "s" value = "Khyriv, UA">Хиров</span></li>
+			<li><span class = "s" value = "Chervonograd, UA">Червоноград</span></li>
+			<li><span class = "s" value = "Yavoriv, ​​UA">Яворов</span></li>
+	    </ul>
+	</li>
+	<li class="first"><span value="Николаевская область" class="k">Николаевская обл.</span>
+	     <ul id="select2">Города
+	        <li><span class = "s" value = "Arbuzynka, UA">Арбузинка</span></li>
+			<li><span class = "s" value = "Bashtanka, UA">Баштанка</span></li>
+			<li><span class = "s" value = "Berezanka, UA">Березанка</span></li>
+			<li><span class = "s" value = "Bereznehuvate, UA">Березнеговатое</span></li>
+			<li><span class = "s" value = "Bratske, UA">Братское</span></li>
+			<li><span class = "s" value = "Veselynove, UA">Веселиново</span></li>
+			<li><span class = "s" value = "Voznesensk, UA">Вознесенск</span></li>
+			<li><span class = "s" value = "Vradiyivka, UA">Врадиевка</span></li>
+			<li><span class = "s" value = "Domanivka, UA">Доманевка</span></li>
+			<li><span class = "s" value = "Yelanets, UA "> Еланец</span></li>
+			<li><span class = "s" value = "Kazanka, UA">Казанка</span></li>
+			<li><span class = "s" value = "Kryve Ozero, UA">Кривое Озеро</span></li>
+			<li><span class = "s" value = "Mykolaiv, UA">Николаев</span></li>
+			<li><span class = "s" value = "Nova Odesa, UA">Новая Одесса</span></li>
+			<li><span class = "s" value = "Novyy Buh, UA">Новый Буг</span></li>
+			<li><span class = "s" value = "Ochakiv, UA">Очаков</span></li>
+			<li><span class = "s" value = "Pervomaysk, Mykolayivs'ka Oblast’, UA">Первомайск</span></li>
+			<li><span class = "s" value = "Snihurivka, UA">Снигиревка</span></li>
+			<li><span class = "s" value = "Yuzhnoukrainsk, UA">Южноукраинск</span></li>
+	    </ul>
+	</li>	
+	 <li class="first"><span value="Одесская область" class="k">Одесская обл.</span>
+	    <ul id="select2">Города
+	        <li><span class = "s" value = "Ananiv, UA">Ананьев</span></li>
+			<li><span class = "s" value = "Artsyz, UA">Арциз</span></li>
+			<li><span class = "s" value = "Balta, UA">Балта</span></li>
+			<li><span class = "s" value = "Bilhorod-Dnistrovskyi, UA">Белгород-Днестровский</span></li>
+			<li><span class = "s" value = "Bilyayivka, UA">Беляевка</span></li>
+			<li><span class = "s" value = "Berezиvka, UA">Березовка</span></li>
+			<li><span class = "s" value = "Bolhrad, UA">Болград</span></li>
+			<li><span class = "s" value = "Vylkove, UA">Вилково</span></li>
+			<li><span class = "s" value = "Izmayil, UA">Измаил</span></li>
+			<li><span class = "s" value = "Kiliia, UA">Килия</span></li>
+			<li><span class = "s" value = "Kodyma, UA">Кодыма</span></li>
+			<li><span class = "s" value = "Odessa, UA">Одесса</span></li>
+			<li><span class = "s" value = "Podilsk, UA">Подольск</span></li>
+			<li><span class = "s" value = "Rozdilna, UA">Разрешение</span></li>
+			<li><span class = "s" value = "Reni, UA">Рени</span></li>
+			<li><span class = "s" value = "Tatarbunary, UA">Татарбунары</span></li>
+			<li><span class = "s" value = "Teplodar, UA">Теплодар</span></li>
+			<li><span class = "s" value = "Illichivsk, UA">Черноморск</span></li>
+			<li><span class = "s" value = "Yuzhne, UA">Южный</span></li>
+	    </ul>
+	</li>
+	<li class="first"><span value="Полтавская область" class="k">Полтавская обл.</span>
+	     <ul id="select2">Города
+	        <li><span class = "s" value = "Hadyach, UA">Гадяч</span></li>
+			<li><span class = "s" value = "Hlobyne, UA">Глобино</span></li>
+			<li><span class = "s" value = "Komsomolsk, UA">Верхние Плавные</span></li>
+			<li><span class = "s" value = "Hrebinka, UA">Гребенка</span></li>
+			<li><span class = "s" value = "Zavodske, UA">Заводское</span></li>
+			<li><span class = "s" value = "Zinkiv, UA">Зеньков</span></li>
+			<li><span class = "s" value = "Karlivka, UA">Карловка</span></li>
+			<li><span class = "s" value = "Kobelyaky, UA">Кобеляки</span></li>
+			<li><span class = "s" value = "Kremenchuk, UA">Кременчуг</span></li>
+			<li><span class = "s" value = "Lokhvytsya, UA">Луховицы</span></li>
+			<li><span class = "s" value = "Lubny, UA">Лубны</span></li>
+			<li><span class = "s" value = "Myrhorod, UA">Миргород</span></li>
+			<li><span class = "s" value = "Pyryatyn, UA">Приятно</span></li>
+			<li><span class = "s" value = "Poltava, UA">Полтава</span></li>
+			<li><span class = "s" value = "Khorol, UA">Хорол</span></li>
+	    </ul>
+	</li>	     	
+	<li class="first"><span  value="Rivnens’ka Oblast’" class="k">Ровненская обл.</span>
+	   <ul id="select2">Города
+	    <li><span class = "s" value = "Berezne, UA">Березно</span></li>
+		<li><span class = "s" value = "Dubno, UA">Дубно</span></li>
+		<li><span class = "s" value = "Dubrovytsya, UA">Дубровица</span></li>
+		<li><span class = "s" value = "Zdolbuniv, UA">Здолбунов</span></li>
+		<li><span class = "s" value = "Korets, UA">Корец</span></li>
+		<li><span class = "s" value = "Kostopil, UA">Костополь</span></li>
+		<li><span class = "s" value = "Kuznetsovsk, UA">Вараш</span></li>
+		<li><span class = "s" value = "Ostroh, UA">Острог</span></li>
+		<li><span class = "s" value = "Radyvyliv, UA">Радивилов</span></li>
+		<li><span class = "s" value = "Rivne, UA">Ровно</span></li>
+		<li><span class = "s" value = "Sarny, UA">Сарны</span></li>
+	   </ul>
+	</li>		
+    <li class="first"><span value="Сумская область" class="k">Сумская обл.</span>
+	      <ul id="select2">Города
+	        <li><span class = "s" value = "Okhtyrka, UA">Ахтырка</span></li>
+			<li><span class = "s" value = "Bilopillya, UA">Белополье</span></li>
+			<li><span class = "s" value = "Buryn, UA">Бурынь</span></li>
+			<li><span class = "s" value = "Vorozhba, UA">Ворожба</span></li>
+			<li><span class = "s" value = "Hlukhiv, UA">Глухов</span></li>
+			<li><span class = "s" value = "Druzhba, UA">Дружба</span></li>
+			<li><span class = "s" value = "Konotop, UA">Конотоп</span></li>
+			<li><span class = "s" value = "Krolevets, UA">Кролевец</span></li>
+			<li><span class = "s" value = "Lebedyn, UA">Лебедин</span></li>
+			<li><span class = "s" value = "Putyvl, UA">Путивль</span></li>
+			<li><span class = "s" value = "Romny, UA">Ромны</span></li>
+			<li><span class = "s" value = "Seredyna-Buda, UA">Середина-Буда</span></li>
+			<li><span class = "s" value = "Sumy, UA> Сумы</span></li>
+			<li><span class = "s" value = "Trostianets, UA">Тростянец</span></li>
+			<li><span class = "s" value = "Shostka, UA">Шостка</span></li>
+	     </ul>
+	</li>
+	<li class="first"><span value="Тернопольская область" class="k">Тернопольськая обл.</span>
+	     <ul id="select2">Города
+<li> <span class = "s" value = "Berezhany, UA">Бережаны</span></li>
+<li> <span class = "s" value = "Borshchiv, UA">Борщев</span></li>
+<li> <span class = "s" value = "Buchach, UA">Бучач</span></li>
+<li> <span class = "s" value = "Zalishchyky, UA">Залещики</span></li>
+<li> <span class = "s" value = "Zbarazh, UA">Збараж</span></li>
+<li> <span class = "s" value = "Zboriv, ​​UA">Собрания</span></li>
+<li> <span class = "s" value = "Kopychyntsi, UA">Копычинцы</span></li>
+<li> <span class = "s" value = "Kremenets, UA">Кременец</span></li>
+<li> <span class = "s" value = "Lanivtsi, UA">Лановцы</span></li>
+<li> <span class = "s" value = "Monastyryska, UA">Монастыриска</span></li>
+<li> <span class = "s" value = "Pidhaytsi, UA">Подгайцы</span></li>
+<li> <span class = "s" value = "Pochaiv, UA">Почаев</span></li>
+<li> <span class = "s" value = "Skalat, UA">Скалат</span></li>
+<li> <span class = "s" value = "Terebovlya, UA">Теребовля</span></li>
+<li> <span class = "s" value = "Ternopil, UA">Тернополь</span></li>
+<li> <span class = "s" value = "Khorostkiv, UA">Хоростков</span></li>
+<li> <span class = "s" value = "Chortkiv, UA">Чертков</span></li>
+<li> <span class = "s" value = "Shumsk, UA">Шумск</span></li>
+	     </ul>
+	</li>	
+    <li class="first"><span value="Харьковская область" class="k">Харьковская обл.</span>
+	    <ul id="select2">Города
+<li> <span class = "s" value = "Balakliia, UA">Балаклея</span></li>
+<li> <span class = "s" value = "Barvinkove, UA">Барвенково</span></li>
+<li> <span class = "s" value = "Bohodukhiv, UA">Богодухов</span></li>
+<li> <span class = "s" value = "Valky, UA">Валки</span></li>
+<li> <span class = "s" value = "Vovchansk, UA">Волчанск</span></li>
+<li> <span class = "s" value = "Derhachi, UA">Дергачи</span></li>
+<li> <span class = "s" value = "Zmiyev, UA">Змиев</span></li>
+<li> <span class = "s" value = "Izium, UA">Изюм</span></li>
+<li> <span class = "s" value = "Chervonograd, UA">Червоноград</span></li>
+<li> <span class = "s" value = "Kupiansk, UA">Купянск</span></li>
+<li> <span class = "s" value = "Lozova, UA">Лозовая</span></li>
+<li> <span class = "s" value = "Lyubotyn, UA">Люботин</span></li>
+<li> <span class = "s" value = "Merefa, UA">Мерефа</span></li>
+<li> <span class = "s" value = "Pervomaiskyi, UA">Первомайский</span></li>
+<li> <span class = "s" value = "Pivdenne, UA">Южное</span></li>
+<li> <span class = "s" value = "Kharkiv, UA">Харьков</span></li>
+<li> <span class = "s" value = "Chuhuiv, UA">Чугуев</span></li>
+       </ul>
+	</li>
+    <li class="first"><span value="Херсонская область" class="k">Херсонская обл.</span>
+	    <ul id="select2">Города
+	        <li> <span class = "s" value = "Oleshky, UA">Алешки</span></li>
+			<li> <span class = "s" value = "Beryslav, UA">Берислав</span></li>
+			<li> <span class = "s" value = "Bilozerka, UA">Белозерка</span></li>
+			<li> <span class = "s" value = "Velyka Lepetykha, UA">Великая Лепетиха</span></li>
+			<li> <span class = "s" value = "Velyka Oleksandrivka, UA">Большая Александровка</span></li>
+			<li> <span class = "s" value = "Verkhniy Rohachyk, UA">Верхний Рогачик</span></li>
+			<li> <span class = "s" value = "Vysokopillia, UA">Высокополье</span></li>
+			<li> <span class = "s" value = "Henichesk, UA">Геническ</span></li>
+			<li> <span class = "s" value = "Hola Prystan, UA">Голая Пристань</span></li>
+			<li> <span class = "s" value = "Hornostayivka, UA">Горностаевка</span></li>
+			<li> <span class = "s" value = "Kalanchak, UA">Каланчак</span></li>
+			<li> <span class = "s" value = "Kakhovka, UA">Каховка</span></li>
+			<li> <span class = "s" value = "Nyzhni Sirohozy, UA">Нижние Серогозы</span></li>
+			<li> <span class = "s" value = "Nova Kakhovka, UA">Новая Каховка</span></li>
+			<li> <span class = "s" value = "Novovorontsovka, UA">Нововоронцовка</span></li>
+			<li> <span class = "s" value = "Novotroitske, UA">Новотроицкое</span></li>
+			<li> <span class = "s" value = "Skadovsk, UA">Скадовск</span></li>
+			<li> <span class = "s" value = "Chaplynka, UA">Чаплинка</span></li>
+			<li> <span class = "s" value = "Tavriisk, UA">Таврийск</span></li>
+			<li> <span class = "s" value = "Kherson, UA">Херсон</span></li>
+		</ul>
+	</li>
+	 <li class="first"><span value="Хмельницкая область" class="k">Хмельницкая обл.</span>
+	    <ul id="select2">Города
+<li><span class = "s" value = "Volochysk, UA">Волочиск</span></li>
+<li><span class = "s" value = "Horodok, Khmel'nyts’ka Oblast’, UA">Городок</span></li>
+<li><span class = "s" value = "Derazhnya, UA">Деражня</span></li>
+<li><span class = "s" value = "Dunaivtsi, UA">Дунаевцы</span></li>
+<li><span class = "s" value = "Iziaslav, UA">Изяслав</span></li>
+<li><span class = "s" value = "Kamieniec Podolski, UA">Каменец-Подольский</span></li>
+<li><span class = "s" value = "Krasyliv, UA">Красилов</span></li>
+<li><span class = "s" value = "Netishyn, UA">Нетешин</span></li>
+<li><span class = "s" value = "Polonne, UA">Полонное</span></li>
+<li><span class = "s" value = "Slavuta, UA">Славута</span></li>
+<li><span class = "s" value = "Starokostiantyniv, UA">Староконстантинов</span></li>
+<li><span class = "s" value = "Khmelnytskyy, UA">Хмельницкий</span></li>
+<li><span class = "s" value = "Shepetivka, UA">Шепетовка</span></li>
+	    </ul>
+	</li>	
+	<li class="first"><span value="Черкасская область" class="k">Черкасская обл.</span>
+	     <ul id="select2">Города
+<li><span class = "s" value = "Vatutine, UA">Ватутино</span></li>
+<li><span class = "s" value = "Horodyshche, Cherkas’ka Oblast’, UA">Городище</span></li>
+<li><span class = "s" value = "Zhashkiv, UA">Жашков</span></li>
+<li><span class = "s" value = "Zvenyhorodka, UA">Звенигородка</span></li>
+<li><span class = "s" value = "Zolotonosha, UA">Золотоноша</span></li>
+<li><span class = "s" value = "Kamianka, UA">Каменка</span></li>
+<li><span class = "s" value = "Kaniv, UA">Канев</span></li>
+<li><span class = "s" value = "Korsun-Shevchenkivskyi, UA">Корсунь-Шевченковский</span></li>
+<li><span class = "s" value = "Monastyryshche, UA">Монастырище</span></li>
+<li><span class = "s" value = "Smila, UA">Смела</span></li>
+<li><span class = "s" value = "Uman, UA">Умань</span></li>
+<li><span class = "s" value = "Khrystynivka, UA">Христиновка</span></li>
+<li><span class = "s" value = "Cherkasy, UA">Черкассы</span></li>
+<li><span class = "s" value = "Chyhyryn, UA">Чигирин</span></li>
+<li><span class = "s" value = "Shpola, UA">Шпола</span></li>
+	    </ul>
+	</li>
+	<li class="first"><span value="Черниговская область" class="k">Черниговская обл.</span>
+	    <ul id="select2">Города
+<li> <span class = "s" value = "Baturyn, UA">Батурин</span></li>
+<li> <span class = "s" value = "Bakhmach, UA">Бахмач</span></li>
+<li> <span class = "s" value = "Bobrovytsya, UA">Бобровица</span></li>
+<li> <span class = "s" value = "Borzna, UA">Борзна</span></li>
+<li> <span class = "s" value = "Horodnya, Chernihivs’ka Oblast’, UA">Городня</span></li>
+<li> <span class = "s" value = "Ichnia, UA">Ичня</span></li>
+<li> <span class = "s" value = "Koryukivka, UA">Корюковка</span></li>
+<li> <span class = "s" value = "Mena, UA">Мена</span></li>
+<li> <span class = "s" value = "Nizhyna, UA">Нежин</span></li>
+<li> <span class = "s" value = "Novhorod-Siverskyi, UA">Новгород-Северский</span></li>
+<li> <span class = "s" value = "Nosivka, UA">Носовка</span></li>
+<li> <span class = "s" value = "Oster, UA">Остер</span></li>
+<li> <span class = "s" value = "Pryluky, UA">Прилуки</span></li>
+<li> <span class = "s" value = "Semenivka, UA">Семеновка</span></li>
+<li> <span class = "s" value = "Shchors, UA">Сновск</span></li>
+<li> <span class = "s" value = "Chernihiv, UA">Чернигов</span></li>
+       </ul>
+	</li>	              	
+    <li class="first"><span value="Черновицкая область" class="k">Черновицкая обл.</span>
+	  <ul id="select2">Города
+<li> <span class = "s" value = "Vashkivtsi, Chernivets’ka Oblast’, UA">Вашковцы</span></li>
+<li> <span class = "s" value = "Vyzhnytsia, UA">Вижница</span></li>
+<li> <span class = "s" value = "Hertsa, UA">Герца</span></li>
+<li> <span class = "s" value = "Zastavna, UA">Заставна</span></li>
+<li> <span class = "s" value = "Kitsman, UA">Кицмань</span></li>
+<li> <span class = "s" value = "Novodnistrovsk, UA">Новоднестровск</span></li>
+<li> <span class = "s" value = "Novoselytsya, UA">Новоселица</span></li>
+<li> <span class = "s" value = "Sokyriany, Chernivets’ka Oblast’, UA">Сокиряны</span></li>
+<li> <span class = "s" value = "Storozhynets, UA">Сторожинец</span></li>
+<li> <span class = "s" value = "Khotyn, UA">Хотин</span></li>
+<li> <span class = "s" value = "Chernivtsi, UA">Черновцы</span></li>
+      </ul>
+	</li>	
+   </ul></div>
+
+<div class="text-center" style="width:90%;margin-left:5%; background: url('cloud1_result.webp');"><span id="OUT1">Вы выбрали: </span><span id="selected"></span><br><em><span id="selected2"></span><span id="adress"></span></em><br><span id="OUT1">Прогноз на 4 дня </span><br><span id="cityC"></span></div>	
+	<div id="tablo">
+        <div class="day">
+			  <img src="" id="tmp24"/><br>
+			 <p id="day21">Сейчас</p>
+			 <div id="demo27"></div>
+			 <div id="demo125"></div>
+			 <div id="demo26"></div>
+			 <div id="demo24"></div>
+		</div>	
+		<div class="day">
+			  <img id="tmp4"/><br>
+			  <div id="demo71"></div>
+			 <p id="day1"></p>
+			 <div id="demo7"></div>
+			 <div id="demo5" ></div>
+			 <div id="demo6"></div>
+			 <div id="demo4"></div>
+		</div>
+
+		<div class="day">
+			   <img id="tmp5"/><br>
+			    <div id="demo72"></div>
+			 <p id="day2"></p>
+			 <div id="demo10"></div>
+			 <div id="demo11"></div>
+			 <div id="demo8"></div>
+			 <div id="demo9"></div>
+		</div> 
+
+		<div class="day">
+			   <img id="tmp6"/><br>
+			   <div id="demo73"></div>
+			 <p id="day3"></p>
+			 <div id="demo14"></div>
+			 <div id="demo15"></div>
+			 <div id="demo12"></div>
+			 <div id="demo13"></div>
+		</div> 
+
+		<div class="day">
+			   <img id="tmp7"/><br>
+			   <div id="demo74"></div>
+			 <p id="day4"></p>
+			 <div id="demo18"></div>
+			 <div id="demo19"></div>
+			 <div id="demo16"></div>
+			 <div id="demo17"></div>
+		</div>
+<p class ="p" style="width:100%;">Карта <a href ="https://leafletjs.com/" target="_blank">Leaflet</a> по точным координатам с использованием API <a href="https://nominatim.org/" target="_blank"> Nominatim</a><br> (если получен однозначный результат поиска)</p>  
+		<div id="map2" style="height:500px;width:80%;"></div>
+<div id="mapsShow" style="border-radius:4px;box-shadow: 0 0 5px rgba(0,0,0,0.5); overflow: hidden; margin: 15px auto; width: 100%;">
+<p>Фрейм <a href ="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> при множественном выборе</p>
+<iframe scrolling="no" seamless="seamless" src="" sandbox="allow-same-origin || allow-top-navigation || allow-forms || allow-scripts" style="border: 0px none; margin-left: 0px; height: 812px; margin-top: 0px; margin-bottom: -110px;width: 100%;div {display:none;}">Ваш браузер не поддерживает встроенные фреймы!
+</iframe> 
+  </div>
+  </div>
+  </div>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="js5_ru.js"></script>
+<script>
+$( ".select3" ).click(function(){ 
+	    $( "li").slideToggle('fast'); 
+	  });
+</script>
+</body>
+</html>
